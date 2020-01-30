@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_13_135056) do
+ActiveRecord::Schema.define(version: 2020_01_30_200834) do
+
+  create_table "apartments", force: :cascade do |t|
+    t.string "name"
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "bigimages", force: :cascade do |t|
+    t.string "name"
+    t.string "image"
+    t.string "gametype"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string "data_file_name", null: false
@@ -20,6 +36,15 @@ ActiveRecord::Schema.define(version: 2020_01_13_135056) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["type"], name: "index_ckeditor_assets_on_type"
+  end
+
+  create_table "gameimages", force: :cascade do |t|
+    t.string "name"
+    t.string "image"
+    t.integer "bigimage_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bigimage_id"], name: "index_gameimages_on_bigimage_id"
   end
 
   create_table "inline_forms_keys", force: :cascade do |t|
@@ -48,11 +73,31 @@ ActiveRecord::Schema.define(version: 2020_01_13_135056) do
     t.index ["inline_forms_locale_id"], name: "index_inline_forms_translations_on_inline_forms_locale_id"
   end
 
+  create_table "languages", force: :cascade do |t|
+    t.string "iso_code"
+    t.string "sub_code"
+    t.string "name"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "locales", force: :cascade do |t|
     t.string "name"
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.string "name"
+    t.string "caption"
+    t.string "image"
+    t.text "description"
+    t.integer "apartment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["apartment_id"], name: "index_photos_on_apartment_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -95,6 +140,16 @@ ActiveRecord::Schema.define(version: 2020_01_13_135056) do
     t.datetime "created_at"
     t.text "object_changes", limit: 1073741823
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+  end
+
+  create_table "words", force: :cascade do |t|
+    t.string "name"
+    t.string "vertaling"
+    t.string "ingesproken_woord"
+    t.integer "bigimage_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bigimage_id"], name: "index_words_on_bigimage_id"
   end
 
 end

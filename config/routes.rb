@@ -1,4 +1,31 @@
 Rails.application.routes.draw do
+  
+  resources :gameimages do
+    post 'revert', :on => :member
+    get 'list_versions', :on => :member
+  end
+  resources :words do
+    post 'revert', :on => :member
+    get 'list_versions', :on => :member
+  end
+  resources :bigimages do
+    post 'revert', :on => :member
+    get 'list_versions', :on => :member
+  end
+  
+  resources :languages do
+    post 'revert', :on => :member
+    get 'list_versions', :on => :member
+  end
+  root :to => 'apartments#index'
+  resources :apartments do
+    post 'revert', :on => :member
+    get 'list_versions', :on => :member
+  end
+  resources :photos do
+    post 'revert', :on => :member
+    get 'list_versions', :on => :member
+  end
   resources :inline_forms_translations do
     post 'revert', :on => :member
     get 'list_versions', :on => :member
