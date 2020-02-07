@@ -1,2 +1,0 @@
-class LanguagesController < InlineFormsController
-end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_30_200834) do
+ActiveRecord::Schema.define(version: 2020_02_07_211229) do
 
   create_table "apartments", force: :cascade do |t|
     t.string "name"
@@ -24,8 +24,10 @@ ActiveRecord::Schema.define(version: 2020_01_30_200834) do
     t.string "name"
     t.string "image"
     t.string "gametype"
+    t.integer "page_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["page_id"], name: "index_bigimages_on_page_id"
   end
 
   create_table "ckeditor_assets", force: :cascade do |t|
@@ -89,6 +91,12 @@ ActiveRecord::Schema.define(version: 2020_01_30_200834) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "pages", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "photos", force: :cascade do |t|
     t.string "name"
     t.string "caption"
@@ -147,9 +155,11 @@ ActiveRecord::Schema.define(version: 2020_01_30_200834) do
     t.string "vertaling"
     t.string "ingesproken_woord"
     t.integer "bigimage_id"
+    t.integer "page_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bigimage_id"], name: "index_words_on_bigimage_id"
+    t.index ["page_id"], name: "index_words_on_page_id"
   end
 
 end

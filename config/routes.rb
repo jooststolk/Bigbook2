@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  resources :pages do
+    post 'revert', :on => :member
+    get 'list_versions', :on => :member
+  end
   resources :gameimages do
     post 'revert', :on => :member
     get 'list_versions', :on => :member
