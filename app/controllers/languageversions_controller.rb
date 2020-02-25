@@ -1,0 +1,2 @@
+class LanguageversionsController < InlineFormsController
+end

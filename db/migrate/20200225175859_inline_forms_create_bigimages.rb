@@ -5,7 +5,6 @@ class InlineFormsCreateBigimages < ActiveRecord::Migration[5.0]
       t.string :name 
       t.string :image 
       t.string :gametype 
-      t.belongs_to :page 
       t.timestamps
     end
   end

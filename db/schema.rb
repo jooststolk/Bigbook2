@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_07_232605) do
+ActiveRecord::Schema.define(version: 2020_02_25_175918) do
 
   create_table "apartments", force: :cascade do |t|
     t.string "name"
@@ -20,14 +20,27 @@ ActiveRecord::Schema.define(version: 2020_02_07_232605) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "bigbooks", force: :cascade do |t|
+    t.string "name"
+    t.string "defaultfrontpageimage"
+    t.string "defaultbackpageimage"
+    t.string "navigationnextimage"
+    t.string "navigationpreviousimage"
+    t.string "navigationgamesimage"
+    t.string "navigationrestartimage"
+    t.string "navigationbackfromgamesimage"
+    t.string "defaultcardbacksideimage"
+    t.string "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "bigimages", force: :cascade do |t|
     t.string "name"
     t.string "image"
     t.string "gametype"
-    t.integer "page_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["page_id"], name: "index_bigimages_on_page_id"
   end
 
   create_table "ckeditor_assets", force: :cascade do |t|
@@ -84,6 +97,15 @@ ActiveRecord::Schema.define(version: 2020_02_07_232605) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "languageversions", force: :cascade do |t|
+    t.integer "language_id"
+    t.string "titel"
+    t.string "frontpageimage"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["language_id"], name: "index_languageversions_on_language_id"
+  end
+
   create_table "locales", force: :cascade do |t|
     t.string "name"
     t.string "title"
@@ -93,8 +115,10 @@ ActiveRecord::Schema.define(version: 2020_02_07_232605) do
 
   create_table "pages", force: :cascade do |t|
     t.string "name"
+    t.integer "bigimage_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["bigimage_id"], name: "index_pages_on_bigimage_id"
   end
 
   create_table "photos", force: :cascade do |t|

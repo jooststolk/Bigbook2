@@ -6,8 +6,6 @@ class Bigimage < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
-  belongs_to :page
-
   has_many :words
   has_many :gameimages
 

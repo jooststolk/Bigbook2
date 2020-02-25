@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
   
+  resources :bigbooks do
+    post 'revert', :on => :member
+    get 'list_versions', :on => :member
+  end
+  resources :languageversions do
+    post 'revert', :on => :member
+    get 'list_versions', :on => :member
+  end
   resources :pages do
     post 'revert', :on => :member
     get 'list_versions', :on => :member
