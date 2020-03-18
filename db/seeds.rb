@@ -1,10 +1,10 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-Locale.create({ id: 1, name: 'en', title: 'English' })
-Role.create({ id: 1, name: 'superadmin', description: 'Super Admin can access all.' })
-User.create({ id: 1, email: 'admin@example.com', locale_id: 1, name: 'Admin', password: 'admin999', password_confirmation: 'admin999' })
+Language.create({ id: 1, name: 'Nederlands', iso_code: 'nl', sub_code: 'NL' })
+Language.create({ id: 2, name: 'English', iso_code: 'en', sub_code: 'US' })
+Language.create({ id: 3, name: 'Papiamentu', iso_code: 'pap', sub_code: 'CW' })
+Language.create({ id: 4, name: 'Papiamento', iso_code: 'pap', sub_code: 'AW' })
+#------------------------------------------------------------------------------------
+Gametype.create({ id: 1, name: 'Memory' })
+Gametype.create({ id: 2, name: 'Chess' })
+Gametype.create({ id: 3, name: 'Shuffle' })
+Gametype.create({ id: 4, name: 'Checkers' })
+#------------------------------------------------------------------------------------

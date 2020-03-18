@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_25_175918) do
+ActiveRecord::Schema.define(version: 2020_03_10_155346) do
 
   create_table "apartments", force: :cascade do |t|
     t.string "name"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2020_02_25_175918) do
 
   create_table "bigbooks", force: :cascade do |t|
     t.string "name"
+    t.string "active"
     t.string "defaultfrontpageimage"
     t.string "defaultbackpageimage"
     t.string "navigationnextimage"
@@ -30,17 +31,27 @@ ActiveRecord::Schema.define(version: 2020_02_25_175918) do
     t.string "navigationrestartimage"
     t.string "navigationbackfromgamesimage"
     t.string "defaultcardbacksideimage"
-    t.string "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "bigimages", force: :cascade do |t|
+  create_table "bigimagelanguageversions", force: :cascade do |t|
     t.string "name"
+    t.integer "languageversion_id"
     t.string "image"
-    t.string "gametype"
+    t.integer "bigimage_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["bigimage_id"], name: "index_bigimagelanguageversions_on_bigimage_id"
+    t.index ["languageversion_id"], name: "index_bigimagelanguageversions_on_languageversion_id"
+  end
+
+  create_table "bigimages", force: :cascade do |t|
+    t.string "name"
+    t.integer "bigbook_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bigbook_id"], name: "index_bigimages_on_bigbook_id"
   end
 
   create_table "ckeditor_assets", force: :cascade do |t|
@@ -56,10 +67,16 @@ ActiveRecord::Schema.define(version: 2020_02_25_175918) do
   create_table "gameimages", force: :cascade do |t|
     t.string "name"
     t.string "image"
-    t.integer "bigimage_id"
+    t.integer "page_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["bigimage_id"], name: "index_gameimages_on_bigimage_id"
+    t.index ["page_id"], name: "index_gameimages_on_page_id"
+  end
+
+  create_table "gametypes", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "inline_forms_keys", force: :cascade do |t|
@@ -89,20 +106,22 @@ ActiveRecord::Schema.define(version: 2020_02_25_175918) do
   end
 
   create_table "languages", force: :cascade do |t|
+    t.string "name"
     t.string "iso_code"
     t.string "sub_code"
-    t.string "name"
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "languageversions", force: :cascade do |t|
+    t.string "name"
     t.integer "language_id"
-    t.string "titel"
-    t.string "frontpageimage"
+    t.string "title"
+    t.integer "bigbook_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["bigbook_id"], name: "index_languageversions_on_bigbook_id"
     t.index ["language_id"], name: "index_languageversions_on_language_id"
   end
 
@@ -115,10 +134,14 @@ ActiveRecord::Schema.define(version: 2020_02_25_175918) do
 
   create_table "pages", force: :cascade do |t|
     t.string "name"
+    t.integer "languageversion_id"
     t.integer "bigimage_id"
+    t.integer "gametype_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bigimage_id"], name: "index_pages_on_bigimage_id"
+    t.index ["gametype_id"], name: "index_pages_on_gametype_id"
+    t.index ["languageversion_id"], name: "index_pages_on_languageversion_id"
   end
 
   create_table "photos", force: :cascade do |t|
@@ -176,13 +199,11 @@ ActiveRecord::Schema.define(version: 2020_02_25_175918) do
 
   create_table "words", force: :cascade do |t|
     t.string "name"
-    t.string "vertaling"
-    t.string "ingesproken_woord"
-    t.integer "bigimage_id"
+    t.string "translation"
+    t.string "spoken_word"
     t.integer "page_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["bigimage_id"], name: "index_words_on_bigimage_id"
     t.index ["page_id"], name: "index_words_on_page_id"
   end
 

@@ -6,11 +6,16 @@ class Language < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
+  def _presentation
+    "#{name}"
+  end
+
+
   def inline_forms_attribute_list
     @inline_forms_attribute_list ||= [
+      [ :name , "name", :text_field ], 
       [ :iso_code , "iso_code", :text_field ], 
       [ :sub_code , "sub_code", :text_field ], 
-      [ :name , "name", :text_field ], 
       [ :image , "image", :image_field ], 
     ]
   end

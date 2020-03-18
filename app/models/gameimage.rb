@@ -6,7 +6,7 @@ class Gameimage < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
-  belongs_to :bigimage
+  belongs_to :page
 
   def _presentation
     "#{name}"

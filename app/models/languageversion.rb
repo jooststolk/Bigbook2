@@ -5,12 +5,21 @@ class Languageversion < ApplicationRecord
   has_paper_trail
 
   belongs_to :language
+  belongs_to :bigbook
+
+  has_many :pages
+
+  def _presentation
+    "#{name}"
+  end
+
 
   def inline_forms_attribute_list
     @inline_forms_attribute_list ||= [
+      [ :name , "name", :text_field ], 
       [ :language , "language", :dropdown ], 
-      [ :titel , "titel", :text_field ], 
-      [ :frontpageimage , "frontpageimage", :text_field ], 
+      [ :title , "title", :text_field ], 
+      [ :pages , "pages", :associated ], 
     ]
   end
 

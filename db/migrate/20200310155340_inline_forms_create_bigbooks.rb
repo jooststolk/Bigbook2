@@ -3,6 +3,7 @@ class InlineFormsCreateBigbooks < ActiveRecord::Migration[5.0]
   def self.up
     create_table :bigbooks do |t|
       t.string :name 
+      t.string :active 
       t.string :defaultfrontpageimage 
       t.string :defaultbackpageimage 
       t.string :navigationnextimage 
@@ -11,7 +12,6 @@ class InlineFormsCreateBigbooks < ActiveRecord::Migration[5.0]
       t.string :navigationrestartimage 
       t.string :navigationbackfromgamesimage 
       t.string :defaultcardbacksideimage 
-      t.string :active 
       t.timestamps
     end
   end

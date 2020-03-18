@@ -1,0 +1,2 @@
+class GametypesController < InlineFormsController
+end

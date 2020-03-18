@@ -4,7 +4,6 @@ class Word < ApplicationRecord
   attr_writer :inline_forms_attribute_list
   has_paper_trail
 
-  belongs_to :bigimage
   belongs_to :page
 
   def _presentation
@@ -15,8 +14,8 @@ class Word < ApplicationRecord
   def inline_forms_attribute_list
     @inline_forms_attribute_list ||= [
       [ :name , "name", :text_field ], 
-      [ :vertaling , "vertaling", :text_field ], 
-      [ :ingesproken_woord , "ingesproken_woord", :text_field ], 
+      [ :translation , "translation", :text_field ], 
+      [ :spoken_word , "spoken_word", :text_field ], 
     ]
   end
 

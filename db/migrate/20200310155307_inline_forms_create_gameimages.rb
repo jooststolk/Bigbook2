@@ -4,7 +4,7 @@ class InlineFormsCreateGameimages < ActiveRecord::Migration[5.0]
     create_table :gameimages do |t|
       t.string :name 
       t.string :image 
-      t.belongs_to :bigimage 
+      t.belongs_to :page 
       t.timestamps
     end
   end

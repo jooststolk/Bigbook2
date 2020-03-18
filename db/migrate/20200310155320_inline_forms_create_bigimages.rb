@@ -3,8 +3,7 @@ class InlineFormsCreateBigimages < ActiveRecord::Migration[5.0]
   def self.up
     create_table :bigimages do |t|
       t.string :name 
-      t.string :image 
-      t.string :gametype 
+      t.belongs_to :bigbook 
       t.timestamps
     end
   end

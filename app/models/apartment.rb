@@ -22,7 +22,7 @@ class Apartment < ApplicationRecord
 
 
   def self.not_accessible_through_html?
-    false
+    true
   end
 
   def self.order_by_clause

@@ -4,10 +4,9 @@ class Bigimage < ApplicationRecord
   attr_writer :inline_forms_attribute_list
   has_paper_trail
 
-  mount_uploader :image, ImageUploader
+  belongs_to :bigbook
 
-  has_many :words
-  has_many :gameimages
+  has_many :bigimagelanguageversions
 
   def _presentation
     "#{name}"
@@ -17,16 +16,13 @@ class Bigimage < ApplicationRecord
   def inline_forms_attribute_list
     @inline_forms_attribute_list ||= [
       [ :name , "name", :text_field ], 
-      [ :image , "image", :image_field ], 
-      [ :words , "words", :associated ], 
-      [ :gametype , "gametype", :text_field ], 
-      [ :gameimages , "gameimages", :associated ], 
+      [ :bigimagelanguageversions , "bigimagelanguageversions", :associated ], 
     ]
   end
 
 
   def self.not_accessible_through_html?
-    false
+    true
   end
 
   def self.order_by_clause

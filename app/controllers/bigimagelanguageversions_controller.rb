@@ -1,0 +1,2 @@
+class BigimagelanguageversionsController < InlineFormsController
+end

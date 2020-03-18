@@ -13,6 +13,9 @@ class Bigbook < ApplicationRecord
   mount_uploader :navigationbackfromgamesimage, NavigationbackfromgamesimageUploader
   mount_uploader :defaultcardbacksideimage, DefaultcardbacksideimageUploader
 
+  has_many :bigimages
+  has_many :languageversions
+
   def _presentation
     "#{name}"
   end
@@ -21,8 +24,8 @@ class Bigbook < ApplicationRecord
   def inline_forms_attribute_list
     @inline_forms_attribute_list ||= [
       [ :name , "name", :text_field ], 
+      [ :active , "active", :text_field ], 
       [ :defaultfrontpageimage , "defaultfrontpageimage", :image_field ], 
-      [ :bigimages , "bigimages", :associated ], 
       [ :defaultbackpageimage , "defaultbackpageimage", :image_field ], 
       [ :navigationnextimage , "navigationnextimage", :image_field ], 
       [ :navigationpreviousimage , "navigationpreviousimage", :image_field ], 
@@ -30,8 +33,8 @@ class Bigbook < ApplicationRecord
       [ :navigationrestartimage , "navigationrestartimage", :image_field ], 
       [ :navigationbackfromgamesimage , "navigationbackfromgamesimage", :image_field ], 
       [ :defaultcardbacksideimage , "defaultcardbacksideimage", :image_field ], 
+      [ :bigimages , "bigimages", :associated ], 
       [ :languageversions , "languageversions", :associated ], 
-      [ :active , "active", :text_field ], 
     ]
   end
 
@@ -44,5 +47,13 @@ class Bigbook < ApplicationRecord
     "name"
   end
 
+  after_create:create_languageversion 
+
+  private
+    def create_languageversion
+     lv = Languageversion.create({ name: "Papiamentu", language_id: 3, title: 'Mi Bigbook' ,bigbook_id: self.id })
+     bi=Bigimage.create({ name: 'Mi Bigimage', bigbook_id: self.id})
+     Bigimagelanguageversion.create({ name: 'Mi Bigimage Papiamentu', languageversion_id: lv.id, bigimage_id: bi.id })
+    end
 
 end
